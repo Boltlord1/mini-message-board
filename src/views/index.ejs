@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>Index Page</title>
+        <link rel="stylesheet" href="../styles.css">
+    </head>
+    <body>
+        <h1>Messages</h1>
+        <a href="/new">New message</a>
+        <div class="list">
+            <% for (const [i, m] of messages.entries()) { %>
+                <div class="message">
+                    <h2><%= m.user %></h2>
+                    <p>Added <%= m.added %></p>
+                    <a href=<%= `messages/${i}` %>>Open</a>
+                </div>
+            <% } %>
+        </div>
+    </body>
+</html>
