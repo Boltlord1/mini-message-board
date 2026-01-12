@@ -7,11 +7,11 @@
         <h1>Messages</h1>
         <a href="/new">New message</a>
         <div class="list">
-            <% for (const [i, m] of messages.entries()) { %>
+            <% for (const message of messages) { %>
                 <div class="message">
-                    <h2><%= m.user %></h2>
-                    <p>Added <%= m.added %></p>
-                    <a href=<%= `messages/${i}` %>>Open</a>
+                    <h2><%= message.msg_user %></h2>
+                    <p>Added <%= format(message.msg_date) %></p>
+                    <a href=<%= `messages/${message.msg_id}` %>>Open</a>
                 </div>
             <% } %>
         </div>
