@@ -1,4 +1,4 @@
 import { Pool } from 'pg'
 
-const connectionString = ${{ Postgres.DATABASE_URL }}
+const connectionString = process.env.DATABASE_PUBLIC_URL
 export default new Pool({connectionString: connectionString})
