@@ -1,6 +1,7 @@
 import path from 'node:path'
 import express from 'express'
 import messageController from './controllers/messages.js'
+import { user, mess } from './controllers/validation.js'
 
 const __dirname = import.meta.dirname
 const assetsPath = path.join(__dirname, '/public/')
@@ -14,7 +15,7 @@ app.use(express.urlencoded({ extended: true }))
 app.get('/', messageController.indexGet)
 app.get('/new', messageController.newGet) 
 app.get('/messages/:id', messageController.messageGet)
-app.post('/new', messageController.newPost)
+app.post('/new', user, mess, messageController.newPost)
 
 app.use((req, res, next) => {
     res.status(404).render('404')
