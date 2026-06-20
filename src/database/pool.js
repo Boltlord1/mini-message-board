@@ -1,14 +1,16 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { Pool } from 'pg';
+import { Pool } from 'pg'
 
-const connectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL
+let connectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL
 if (!connectionString) {
 	console.error('No database connection string found')
+} else {
+    const url = new URL(connectionString)
+    url.searchParams.delete('sslmode')
+    connectionString = url.toString()
 }
 
 export default new Pool({
-    connectionString: connectionString,
-    ssl: false,
+    connectionString,
+    ssl: { rejectUnauthorized: false },
 	max: 1
 })
