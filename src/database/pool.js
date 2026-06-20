@@ -1,4 +1,13 @@
-import { Pool } from 'pg'
+import fs from 'node:fs';
+import path from 'node:path';
+import { Pool } from 'pg';
 
-const connectionString = process.env.DATABASE_URL
-export default new Pool({connectionString: connectionString})
+const caCertPath = path.join(process.cwd(), 'supabase-ca.crt');
+const caCert = fs.readFileSync(caCertPath, 'utf8');
+
+const connectionString = process.env.POSTGRES_URL
+export default new Pool({
+    connectionString: connectionString,
+    ssl: { rejectUnauthorized: true, ca: caCert },
+	max: 1
+})
