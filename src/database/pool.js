@@ -5,9 +5,10 @@ import { Pool } from 'pg';
 const caCertPath = path.join(process.cwd(), 'supabase-ca.crt');
 const caCert = fs.readFileSync(caCertPath, 'utf8');
 
+console.log(process.env.POSTGRES_URL)
 const connectionString = process.env.POSTGRES_URL
 export default new Pool({
     connectionString: connectionString,
-    ssl: { rejectUnauthorized: true, ca: caCert },
+    ssl: { rejectUnauthorized: false },
 	max: 1
 })
